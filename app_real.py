@@ -340,12 +340,9 @@ def ask(question):
     return answer_manager(question, STATE["analysis"])
 
 def review_choices():
-    if not STATE["analysis"]:
-        return []
     ids = ["96ab47052a57bbfbba3b48d4203cf1f3", "cd76397f23913425751779c775bb8499",
            "8ccb6f10802a0a4341f9a339cdc7f715", "574eb8fce37a82e08574336beddd2d2c"]
-    reviews = STATE["analysis"]["reviews"].set_index("review_id")
-    return [(f"Review {rid[:10]}…", rid) for rid in ids if rid in reviews.index]
+    return [(f"Review real {rid[:10]}…", rid) for rid in ids]
 
 def load_review(review_id):
     a = STATE["analysis"]
