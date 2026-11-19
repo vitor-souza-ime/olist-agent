@@ -6,7 +6,7 @@ Data da execução: 19/11/2026.
 
 Comando: python -m pytest -q
 
-Resultado: 11 testes aprovados.
+Resultado: 16 testes aprovados.
 
 ## Execução sobre o dataset Olist fornecido
 
