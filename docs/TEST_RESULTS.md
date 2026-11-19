@@ -6,7 +6,7 @@ Data da execução: 19/11/2026.
 
 Execução: python -m pytest -q
 
-Resultado: 10 passed.
+Resultado: 11 passed.
 
 ## Cenários de aceitação exibidos na aplicação
 
