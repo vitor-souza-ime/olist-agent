@@ -1,13 +1,38 @@
-# Roteiro de demonstração do protótipo
+# Roteiro de demonstração — até 5 minutos
 
-Duração sugerida: 4min30s a 5min.
+## 0:00–0:30 — Abertura
 
-1. Abertura (0:00–0:30): apresentar o Olist Intelligent Marketplace e explicar que a Fase 2 definiu quatro agentes, enquanto a Fase 3 implementa primeiro o Agente de Análise de Reviews.
-2. Problema de negócio (0:30–1:00): avaliações textuais não estruturadas dificultam a identificação de causas recorrentes e a priorização de ações por qualidade, logística, sellers e Customer Service.
-3. Entrada e processamento (1:00–1:45): mostrar a interface, explicar o upload do CSV/ZIP e demonstrar a análise de uma avaliação.
-4. Exemplos (1:45–3:00): executar os casos de pedido incompleto, divergência entre nota e comentário e alegação crítica. Destacar a recomendação e a revisão humana.
-5. Lote e visão executiva (3:00–3:45): executar o lote sintético e mostrar agrupamento de causas e exportação CSV. Reforçar que frequências do lote demonstrativo não representam toda a Olist.
-6. Validação e limites (3:45–4:30): mostrar os cinco cenários aprovados e explicar limites do motor local, integração opcional com LLM e ausência de ações autônomas sensíveis.
-7. Fechamento (4:30–5:00): apresentar benefícios esperados e próximos passos: executar com a base completa, avaliar com especialistas, integrar sinais aos outros agentes e definir métricas operacionais.
+Apresentar a evolução da Fase 2 para a Fase 3. Na Fase 2 foram definidos quatro agentes; nesta etapa, o Agente de Análise de Reviews foi prototipado.
 
-Link do vídeo: a inserir após a gravação. O vídeo ainda não foi gravado ou publicado.
+## 0:30–1:05 — Dataset real
+
+Mostrar o painel: 99.224 linhas originais, 98.410 review_id únicos após deduplicação, nota média 4,09 e 14,6% de avaliações com nota 1 ou 2.
+
+## 1:05–2:00 — Pergunta ao agente
+
+Na aba “Pergunte ao agente”, executar: “Quais são os três problemas mais importantes encontrados nas avaliações e o que a Olist deveria fazer?”
+
+Mostrar:
+1. Entrega e cumprimento do pedido: 3.970 comentários (36,6%).
+2. Produto: qualidade, defeito ou divergência: 1.255 (11,6%).
+3. Pós-venda: atendimento, devolução e pagamento: 852 (7,8%).
+
+Explicar que os grupos são multirrótulo e os percentuais não são aditivos.
+
+## 2:00–3:15 — Review real
+
+Na aba “Analisar avaliação real”, selecionar review_id 96ab47052a57bbfbba3b48d4203cf1f3. Mostrar a nota 1, o relato de recebimento de metade do pedido apesar da nota fiscal indicar todos os itens, a classificação de pedido incompleto e a recomendação de conferir picking, packing, nota fiscal e comprovante.
+
+## 3:15–4:05 — Relação com logística
+
+Mostrar notas médias: 2,57 para pedidos atrasados e 4,30 para pedidos no prazo/antecipados. Mostrar também a proporção de notas 1–2: 54,1% versus 9,2%. Explicar que se trata de associação observacional.
+
+## 4:05–4:40 — Limites e governança
+
+A triagem lexical identificou padrões em 52,7% dos comentários negativos com texto. Os 47,3% restantes não foram classificados à força. Casos críticos e ambíguos exigem revisão humana. A segunda opinião generativa é opcional.
+
+## 4:40–5:00 — Encerramento
+
+Apresentar próximos passos: rotular amostra por especialistas, medir precisão e recall por tema, refinar taxonomia e integrar sinais aos demais agentes.
+
+Link do vídeo: inserir após a gravação e publicação.
