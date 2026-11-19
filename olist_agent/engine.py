@@ -168,8 +168,8 @@ def _get_theme(text: str) -> tuple[str, list[str]]:
         return "positive_experience", positive_hits
     # Critical safety/integrity allegations have precedence and always require review.
     for theme in [
-        "critical_integrity_safety", "incomplete_order", "delivery", "product_mismatch",
-        "product_quality", "packaging", "customer_service", "payment",
+        "critical_integrity_safety", "incomplete_order", "payment", "delivery", "product_mismatch",
+        "product_quality", "packaging", "customer_service",
     ]:
         hits = _find_matches(text, KEYWORDS[theme])
         if hits:
