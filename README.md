@@ -1,132 +1,87 @@
-# Olist Intelligent Reviews
+# Olist Intelligent Reviews — Tech Challenge Fase 3
 
-Protótipo funcional do Agente de Análise de Reviews, desenvolvido como evolução do Tech Challenge — Fase 2 para a Fase 3 (Experiment & Build).
+Protótipo funcional do Agente de Análise de Reviews, evoluído a partir do desenho operacional da Fase 2 e executado sobre o dataset público real da Olist.
 
-> Protótipo acadêmico independente, sem vínculo oficial com a Olist. Não executa ações em sistemas de produção e não substitui a revisão humana.
+> Projeto acadêmico independente, sem vínculo oficial com a Olist. Não executa ações em sistemas de produção e não substitui revisão humana.
 
-## Entregáveis
+## Resultados reais da execução
 
-- [Interface da aplicação](app.py)
-- [Motor de classificação](olist_agent/engine.py)
-- [Leitura e enriquecimento de dados](olist_agent/data.py)
-- [Integração opcional com OpenRouter](olist_agent/llm.py)
-- [Testes automatizados](tests/)
-- Código, testes e documentação de auditoria disponíveis neste repositório.
+- 99.224 linhas originais em Order_Reviews.
+- 98.410 review_id únicos após remover 814 linhas excedentes por identificador repetido.
+- Nota média: 4,09/5.
+- 14.396 avaliações (14,6%) receberam nota 1 ou 2.
+- 10.861 avaliações com nota 1 ou 2 possuem comentário textual.
+- A triagem lexical encontrou pelo menos um padrão em 5.719 comentários (52,7% dos comentários negativos com texto).
 
-## O que a aplicação faz
+Três grupos prioritários:
 
-- Recebe uma avaliação individual ou um lote de avaliações.
-- Classifica sentimento, tema e severidade.
-- Detecta possíveis divergências entre nota e comentário.
-- Recomenda uma ação corretiva e uma área responsável.
-- Encaminha alegações potencialmente críticas de fraude, autenticidade ou segurança para revisão humana obrigatória.
-- Gera resumo executivo, frequências de causas e arquivo CSV auditável.
-- Permite carregar a tabela `olist_order_reviews_dataset.csv`, arquivos CSV auxiliares ou um ZIP com o dataset Olist.
-- Pode solicitar uma segunda análise a um modelo via OpenRouter, de forma opcional e manual.
+| Grupo | Comentários | Percentual |
+|---|---:|---:|
+| Entrega e cumprimento do pedido | 3.970 | 36,6% |
+| Produto: qualidade, defeito ou divergência | 1.255 | 11,6% |
+| Pós-venda: atendimento, devolução e pagamento | 852 | 7,8% |
 
-## Executar localmente
+Os grupos são multirrótulo e se sobrepõem; os percentuais não são aditivos. A triagem lexical identifica menções explícitas e não equivale a uma classificação semântica validada por especialistas.
 
-Requer Python 3.10 ou superior.
+## Aplicação
 
-### Windows (PowerShell)
+O arquivo `app.py` inicia a versão com dados reais:
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
+```bash
 python -m pip install -r requirements.txt
 python app.py
 ```
 
-### Linux/macOS
+Abra `http://127.0.0.1:7860`.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python app.py
-```
-
-Abra `http://127.0.0.1:7860` no navegador.
-
-## Testar
-
-```bash
-python -m pytest -q
-python run_demo.py
-```
-
-Validação local desta entrega: 11 testes automatizados aprovados e 5/5 cenários de aceitação aprovados.
+A interface oferece:
+- Painel executivo com métricas reais;
+- pergunta gerencial respondida a partir dos indicadores calculados;
+- análise individual de reviews reais;
+- evidências literais, leitura contextual, severidade e recomendação;
+- carregamento do ZIP original do dataset.
 
 ## Dados
 
-A aplicação inicia com `data/demo_reviews.csv`, contendo dez casos sintéticos criados para demonstrar comportamentos específicos. Eles não são registros reais da Olist e não devem ser usados para inferir padrões de negócio.
+Baixe o dataset oficial: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
-Para uma análise real, obtenha o Brazilian E-Commerce Public Dataset by Olist no Kaggle e carregue `olist_order_reviews_dataset.csv`. Para enriquecer as avaliações, carregue também:
+Salve o ZIP em `data/olist_public_dataset.zip` ou carregue-o pela interface. O ZIP bruto não é versionado neste repositório por tamanho e para evitar redistribuição desnecessária.
 
-- `olist_orders_dataset.csv`;
-- `olist_order_items_dataset.csv`;
-- `olist_products_dataset.csv`;
-- `olist_sellers_dataset.csv`.
+O agente lê reviews, orders, order_items, products e sellers. A unidade de análise é review_id único; linhas excedentes de IDs repetidos são removidas mantendo a primeira ocorrência. Itens de um pedido são agregados antes do relacionamento, evitando multiplicar avaliações.
 
-O protótipo agrega itens por `order_id` antes do relacionamento, evitando multiplicar uma avaliação quando o pedido possui mais de um item. Os campos de cliente e geolocalização não são necessários para o escopo inicial do agente de reviews.
+Fonte: Olist, *Brazilian E-Commerce Public Dataset by Olist*, Kaggle (2018). Licença indicada na fonte: CC BY-NC-SA 4.0. Atribuição, uso não comercial e compartilhamento pela mesma licença devem ser respeitados.
 
-Dataset original: [Brazilian E-Commerce Public Dataset by Olist — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). Consulte a licença e os termos de uso do dataset na fonte original antes de redistribuir dados.
+## Demonstração em terminal
 
-## Integração opcional com OpenRouter
-
-O motor local funciona sem API key. Para solicitar uma segunda análise generativa de uma avaliação individual:
-
-1. Abra a aba **Analisar avaliação**.
-2. Expanda **Integração generativa opcional (OpenRouter)**.
-3. Informe sua chave e o identificador do modelo disponível na sua conta.
-4. Execute o agente.
-
-A chamada externa só ocorre quando o usuário fornece a chave e executa a análise. A chave não está incluída no repositório. Não envie dados pessoais ou informações confidenciais. A saída da LLM é uma segunda opinião e deve ser comparada com a evidência e a revisão humana.
-
-## Arquitetura resumida
-
-```text
-CSV/ZIP Olist ou entrada manual
-              |
-              v
-      Validação e contexto
-              |
-              v
-     Motor local de triagem
-   sentimento / tema / severidade
-              |
-              v
-     Recomendação e prioridade
-              |
-        +-----+------+
-        |            |
-        v            v
-  Caso comum    Alegação crítica
-        |            |
-        v            v
-  Saída/CSV    Revisão humana
+```bash
+python run_demo.py
 ```
 
-A integração OpenRouter é opcional e não substitui o motor local nem os controles humanos.
+O script carrega o dataset real, responde à pergunta do gestor e analisa uma avaliação real de pedido incompleto.
 
-## Limites conhecidos
+## Testes
 
-- A classificação local usa regras e palavras-chave explícitas; pode falhar com ironia, ambiguidade, negação complexa, erros ortográficos e comentários multilíngues.
-- A severidade é uma triagem operacional, não uma probabilidade calibrada.
-- A frequência de causas descreve somente o arquivo carregado; não deve ser generalizada para toda a Olist sem amostragem representativa.
-- Não há integração com CRM, transportadoras, sistemas de pagamento ou gestão de sellers.
-- O protótipo não aplica sanções, reembolsos, cancelamentos ou compensações.
-- A integração com LLM não foi executada na validação local porque não foi fornecida uma API key.
-- A amostra de 100 avaliações mencionada em uma demonstração anterior não foi recuperada com os registros individuais e critérios de seleção auditáveis; seus resultados não são apresentados como métricas confirmadas.
+```bash
+python -m pytest -q
+```
 
-## Auditoria
+A versão local foi validada com 11 testes automatizados aprovados.
 
-- [Plano de testes](docs/TEST_PLAN.md)
-- [Resultados dos testes](docs/TEST_RESULTS.md)
-- [Arquitetura e fluxo](docs/ARCHITECTURE.md)
-- [Trilha de auditoria](docs/AUDIT_TRAIL.md)
-- [Roteiro do vídeo executivo](docs/DEMO_SCRIPT.md)
+## Separação metodológica
 
-## Licença
+1. Quantitativa/lexical: contagem reproduzível de padrões explícitos em reviews com nota 1 ou 2 e texto.
+2. Contextual: interpretação explicável de uma avaliação individual; hipótese operacional, não confirmação da causa.
+3. Semântica generativa: extensão opcional via OpenRouter para uma segunda opinião individual; requer API key e não calcula as frequências do relatório.
+4. Revisão humana: alegações críticas, ambiguidades, divergência nota-texto e comentários sem correspondência lexical.
 
-O código deste protótipo está sob MIT. Isso não altera nem substitui a licença do dataset Olist, que permanece regida pelos termos da fonte original.
+## Documentação e auditoria
+
+- `docs/DATA_ANALYSIS_REAL.md`: filtros, denominadores, métricas e limitações;
+- `docs/AGENT_REAL.md`: especificação do agente;
+- `docs/DEMO_SCRIPT.md`: roteiro de demonstração de até cinco minutos;
+- `data/analysis_snapshot.json`: agregados calculados;
+- `data/dataset_manifest.json`: origem, SHA-256 e tabelas analisadas.
+
+## Repositório
+
+https://github.com/vitor-souza-ime/olist-agent
