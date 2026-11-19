@@ -307,7 +307,7 @@ def answer_manager(question, a):
         lines += [
             f"### {i}. {row['label']}",
             f"**{br_int(row['count'])} comentários ({br_num(row['share_pct'])}% dos comentários de notas 1–2 com texto).**",
-            f"Ação recomendada: {ACTIONS[row['label']]}",
+            f"Ação recomendada: {ACTIONS.get(row['label'], 'Encaminhar para a área responsável e revisar a evidência textual.')}",
             ""
         ]
     lines += [
