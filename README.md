@@ -65,7 +65,7 @@ O script carrega o dataset real, responde à pergunta do gestor e analisa uma av
 python -m pytest -q
 ```
 
-A versão local foi validada com 11 testes automatizados aprovados.
+A versão local foi validada com 16 testes automatizados aprovados.
 
 ## Separação metodológica
 
