@@ -1,40 +1,44 @@
-# Trilha de auditoria
+# Trilha de auditoria — Olist Intelligent Reviews
 
 ## Identificação
 
 - Projeto: Olist Intelligent Marketplace.
-- Entrega: Tech Challenge — Fase 3 (Experiment & Build).
-- Protótipo: Olist Intelligent Reviews.
-- Agente implementado: Agente de Análise de Reviews.
-- Repositório: https://github.com/vitor-souza-ime/olist-agent
+- Entrega: Tech Challenge — Fase 3.
+- Agente: Olist Intelligent Reviews.
+- Repositório: https://github.com/vitor-souza-ime/olist-agent.
 
-## Fontes de requisitos
+## Fontes
 
-1. POSTECH - Tech Challenge - Fase 3.pdf, enviado no contexto deste projeto em 19/11/2026.
-2. Tech_Challenge_Fase2_Olist_Agentes_IA(1).docx, relatório da Fase 2 enviado no mesmo contexto.
-3. Dataset público Brazilian E-Commerce Public Dataset by Olist, disponível em https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce.
+1. POSTECH — Tech Challenge — Fase 3.pdf, fornecido pelo usuário.
+2. Relatório da Fase 2 — Tech_Challenge_Fase2_Olist_Agentes_IA(1).docx.
+3. Olist, Brazilian E-Commerce Public Dataset by Olist, Kaggle (2018): https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce.
 
-## Rastreabilidade requisito → implementação
+## Integridade do arquivo analisado
 
-| Requisito da Fase 3 | Evidência no protótipo |
+- Nome recebido: archive.zip.
+- SHA-256: 967e41e04fc306fe604e2a693f488995a8b41e5047418f8a5c8e4abd6deca784.
+- Linhas originais de reviews: 99.224.
+- review_id únicos: 98.410.
+- Linhas excedentes removidas: 814.
+- Licença na fonte: CC BY-NC-SA 4.0.
+
+## Rastreabilidade
+
+| Requisito | Evidência |
 |---|---|
-| Objetivo do agente | README.md, docs/ARCHITECTURE.md e interface. |
-| Fluxo básico | docs/ARCHITECTURE.md e fluxo operacional. |
-| Interação com usuário | Abas “Analisar avaliação” e “Análise em lote”. |
-| Base de conhecimento/contexto | Esquema de order_reviews e enriquecimento opcional com Orders, Order_Items, Products e Sellers. |
-| Exemplos de interação | docs/TEST_PLAN.md e aba “Validação e auditoria”. |
-| Avaliação do protótipo | docs/TEST_RESULTS.md. |
-| Benefícios, limitações e melhorias | Relatório executivo da Fase 3. |
-| Vídeo executivo de até 5 minutos | Roteiro preparado em docs/DEMO_SCRIPT.md; gravação/link permanecem pendentes. |
+| Evolução da Fase 2 | Relatório executivo consolidado |
+| Protótipo funcional | app.py e app_real.py |
+| Objetivo e fluxo | docs/AGENT_REAL.md e docs/ARCHITECTURE.md |
+| Base de conhecimento/contexto | docs/DATA_ANALYSIS_REAL.md e data/dataset_manifest.json |
+| Exemplos reais | IDs de reviews documentados no relatório e no roteiro |
+| Avaliação do protótipo | docs/TEST_RESULTS.md |
+| Limitações e próximos passos | Relatório executivo |
+| Vídeo de até 5 minutos | docs/DEMO_SCRIPT.md; link pendente até gravação |
 
-## Integridade e limitações da evidência
+## Governança
 
-A amostra de 100 avaliações citada em uma demonstração anterior não foi recuperada com registros individuais, identificadores e critérios de seleção auditáveis. Portanto, as frequências e estatísticas associadas àquela demonstração não são incorporadas como resultados confirmados. O arquivo data/demo_reviews.csv contém dez casos sintéticos, identificados pelo prefixo DEMO-, exclusivamente para demonstrar e testar o fluxo.
-
-## Segurança e governança
-
-- Nenhuma chave de API é versionada.
-- A integração externa é opcional e manual.
-- O protótipo não executa ações transacionais nem sanções.
-- Casos críticos são encaminhados para validação humana.
-- O CSV de demonstração não contém identificadores reais de clientes ou pedidos.
+- Não versionar API keys.
+- Não concluir fraude, falsificação, defeito ou culpa de seller somente com review.
+- Não executar reembolsos, cancelamentos ou penalidades.
+- Revisar alegações críticas e casos ambíguos por pessoas responsáveis.
+- O ZIP original não é versionado no GitHub; agregados e manifesto são mantidos para auditoria.
