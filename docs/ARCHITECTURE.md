@@ -1,33 +1,33 @@
-# Arquitetura funcional — Olist Intelligent Reviews
-
-## Escopo
-
-A Fase 2 definiu quatro agentes prioritários: Atendimento ao Cliente, Análise de Reviews, Logística e Previsão de Atrasos, e Churn e Fidelização. Para a Fase 3, o protótipo implementa somente o Agente de Análise de Reviews, preservando os outros três no roadmap.
+# Arquitetura — Olist Intelligent Reviews
 
 ## Componentes
 
-1. Interface web em Gradio: entrada manual, upload de CSV/ZIP, análise individual, análise em lote, visão executiva e validação.
-2. Camada de dados: leitura do CSV de avaliações; relacionamento opcional com Orders, Order_Items, Products e Sellers por order_id, product_id e seller_id.
-3. Motor local: classificação explícita de sentimento, tema e severidade; detecção de divergência nota-texto; recomendação e encaminhamento.
-4. Integração generativa opcional: OpenRouter, acionada manualmente para uma avaliação individual. Não é necessária para executar o fluxo básico.
-5. Saídas: tabela estruturada, relatório executivo e CSV para auditoria.
+- app.py: ponto de entrada da aplicação.
+- app_real.py: interface Gradio, carregamento do ZIP, análise agregada, consulta gerencial e análise individual.
+- olist_agent/llm.py: segunda opinião opcional via OpenRouter para uma avaliação individual.
+- tests/: testes automatizados.
+- docs/: especificação, análise quantitativa, plano de demonstração e trilha de auditoria.
 
-## Fluxo operacional
+## Fluxo
 
-Entrada da avaliação ou lote → validação → enriquecimento opcional → interpretação da nota e do comentário → classificação → severidade → recomendação → revisão humana quando crítica → saída estruturada.
+ZIP do dataset Olist → validação e deduplicação por review_id → normalização textual → triagem lexical multirrótulo → cruzamento com Orders e categorias → indicadores → resposta gerencial / análise individual → recomendação e revisão humana quando necessário.
 
-## Entradas e saídas
+## Relacionamentos
 
-| Elemento | Campos / conteúdo |
-|---|---|
-| Avaliações | review_id, order_id, review_score, review_comment_title, review_comment_message, review_creation_date |
-| Contexto opcional | status e datas do pedido; seller; produto; categoria |
-| Saídas | sentimento, tema, severidade, evidência, recomendação, área responsável, divergência, necessidade de revisão humana |
+- Order_Reviews.order_id → Orders.order_id.
+- Orders.order_id → Order_Items.order_id.
+- Order_Items.product_id → Products.product_id.
+- Order_Items.seller_id → Sellers.seller_id.
 
-## Limites de autonomia
+Os itens de cada pedido são agregados antes da associação para evitar multiplicar reviews de pedidos com vários produtos.
 
-O agente pode classificar, resumir, priorizar e recomendar. Não pode determinar culpa, confirmar fraude, aplicar penalidade a seller, autorizar reembolso, cancelar pedido ou alterar promessa de entrega. Alegações de fraude, autenticidade ou segurança exigem apuração humana.
+## Camadas
 
-## Separação entre regras e LLM
+1. Motor quantitativo/lexical local: contagens reproduzíveis, sem API.
+2. Leitura contextual: interpretação explicável de uma avaliação individual, sem afirmar causa como fato.
+3. Segunda opinião semântica opcional: OpenRouter, acionada pelo usuário, não usada para gerar métricas agregadas.
+4. Revisão humana: alegações críticas, ambiguidades e casos sem padrão lexical.
 
-O motor local garante execução reproduzível sem rede ou API key. A LLM é opcional e atua como segunda opinião. A saída generativa não substitui evidência, controles nem revisão humana.
+## Limites
+
+O protótipo não acessa sistemas transacionais, não executa reembolso ou cancelamento e não aplica penalidades a sellers. Severidade é uma triagem, não probabilidade calibrada.
