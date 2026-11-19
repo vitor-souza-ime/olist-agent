@@ -32,7 +32,7 @@ python -m pip install -r requirements.txt
 python app.py
 ```
 
-Abra `http://127.0.0.1:7860`.
+No Windows, também é possível executar `INSTALAR_E_INICIAR.bat`. Abra `http://127.0.0.1:7860`.
 
 A interface oferece:
 - Painel executivo com métricas reais;
