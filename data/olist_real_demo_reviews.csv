@@ -1,8 +1,8 @@
 review_id,order_id,review_score,review_comment_title,review_comment_message
-REAL-DEMO-001,public-olist-review-001,2,,"Não recebi o produto paguei por boleto e não teve uma explicação o porque tiveram problema com a entrega."
-REAL-DEMO-002,public-olist-review-002,1,,"AINDA NAO RECEBI MINHA MERCADORIA"
-REAL-DEMO-003,public-olist-review-003,2,,"Achei frete muito caro, demorou muito p chegar, queria ter entregue no dia dos pais. Só chegou terça dia 15"
-REAL-DEMO-004,public-olist-review-004,1,"Produto com defeito","Recebi o produto com defeito e aguardo resolução."
-REAL-DEMO-005,public-olist-review-005,1,"baixa qualidade","Esperava que a mercadoria tivesse mais qualidade; péssima qualidade."
-REAL-DEMO-006,public-olist-review-006,1,,"Caixa chegou violada. Produto faltando peças e com marcas de uso."
-REAL-DEMO-007,public-olist-review-007,1,,"Chegou meu produto fui verificar o suporte de TV faltou a haste de ajuste."
+7f5fd2cd0f2f1d7df8d7313c1a02ce96,9f6fbfd6d1361fb26a26f6e26265589a,2,,"Não recebi o produto paguei por boleto e não teve uma explicação o porque tiveram problema com a entrega. Eu gostaria de saber, pois sempre recebi tudo que comprei."
+2627e017da1c7aa18211876ff1a8e5c9,c12658dc350b49b1970455764f1137f3,1,,AINDA NAO RECEBI MINHA MERCADORIA
+3b645069ede29bb44cb122bac9faa58c,3b62cf19155645bbcd58c9b11c9efce1,2,,"Achei frete muito caro, demorou muito p chegar, queria ter entregue no dia dos pais. Só chegou terça dia 15"
+b72bd3fd585afc34753bab0faa77d064,73e019fdcb05a01a6a7200bce40ef5f6,1,,Recebi o produto dia 15.12.17 e encaminhei um e-mail ao stark sobre ter recebido o produto com Defeito.
+f2e1f75e072626b94b70907c03c216ee,387ab69cd89bb3ed95402ff3d7f50b94,1," baixa qualilidade","Esperava q a mercadoria tivesse mais qualidade ...pessima qualidade...nao indico a ninguem..."
+456be61f896c9bd3767bce76676ec74b,9353617a6ed6c70e06f34d0adfe8e4b2,1,Produto com defeito,"Produto da foto não era igual ao que recebi. Veio com defeito. Solicito informações para devolução."
+f2421ea8b287730c782017d456f82d52,ec002084195fcce7185eab399b71ee73,1,,"Caixa chegou violada. Produto faltando peças e com marcas de uso."
