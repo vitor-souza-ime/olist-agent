@@ -7,3 +7,7 @@ venv/
 *.pyc
 *.log
 .DS_Store
+
+# Dataset Olist (baixado do Kaggle; não versionar)
+data/olist_public_dataset.zip
+data/raw/
