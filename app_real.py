@@ -277,6 +277,26 @@ def classify_review(score, title, comment):
     }
 
 def answer_manager(question, a):
+    q = normalize(question)
+    if any(term in q for term in ["entrega", "atras", "prazo", "logistica"]):
+        d = a.get("delivery", {})
+        if d:
+            late, ontime = d["late"], d["on_time"]
+            return (
+                "## Evidência quantitativa — entrega\n\n"
+                f"- Atrasados: {br_int(late['reviews'])} reviews; nota média {br_num(late['average_score'], 2)}; "
+                f"{br_num(late['low_share'])}% com nota 1 ou 2.\n"
+                f"- No prazo/antecipados: {br_int(ontime['reviews'])} reviews; nota média {br_num(ontime['average_score'], 2)}; "
+                f"{br_num(ontime['low_share'])}% com nota 1 ou 2.\n"
+                f"- Atraso médio: {br_num(d['mean_late_days'], 2)} dias; mediana: {br_num(d['median_late_days'], 2)} dias.\n\n"
+                "Associação observacional, não prova de causalidade exclusiva. Recomenda-se auditar rastreamento, comprovante de entrega e parceiros logísticos."
+            )
+    if "categoria" in q:
+        rows = a.get("categories", [])[:5]
+        return "## Categorias associadas a mais notas 1–2\n\n" + "\n".join(
+            f"- {x['category']}: {br_int(x['low_reviews'])} reviews baixos em {br_int(x['associations'])} associações ({br_num(x['low_share'])}%)."
+            for x in rows
+        ) + "\n\nPedidos com múltiplas categorias aparecem em mais de uma associação."
     lines = [
         "## Três prioridades identificadas nas avaliações reais",
         "",
