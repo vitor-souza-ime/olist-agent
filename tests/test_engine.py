@@ -48,3 +48,9 @@ def test_batch_summary_counts_rows_and_themes():
     assert summary["total"] == 2
     assert summary["negative"] == 1
     assert summary["top_causes"][0]["count"] >= 1
+
+
+def test_payment_refund_issue_is_not_misclassified_as_delivery():
+    r = analyze_review({"review_score": 1, "review_comment_message": "Foi cobrado duas vezes e não recebi o estorno."})
+    assert r["theme"] == "payment"
+    assert r["severity"] == "Alta"
