@@ -6,9 +6,12 @@ Protótipo funcional do Agente de Análise de Reviews, desenvolvido como evoluç
 
 ## Entregáveis
 
-- [Pacote completo do código-fonte e documentação](source_bundle.zip)
-- [Relatório executivo da Fase 3](deliverables/Relatorio_Executivo_Tech_Challenge_Fase3_Olist.docx)
-- Código, testes, arquitetura, plano de testes, resultados e trilha de auditoria disponíveis neste repositório.
+- [Interface da aplicação](app.py)
+- [Motor de classificação](olist_agent/engine.py)
+- [Leitura e enriquecimento de dados](olist_agent/data.py)
+- [Integração opcional com OpenRouter](olist_agent/llm.py)
+- [Testes automatizados](tests/)
+- Código, testes e documentação de auditoria disponíveis neste repositório.
 
 ## O que a aplicação faz
 
