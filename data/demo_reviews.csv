@@ -1,0 +1,11 @@
+review_id,order_id,review_score,review_comment_title,review_comment_message,review_creation_date,product_category_name,seller_id
+DEMO-001,DEMO-ORDER-001,1,Pedido incompleto,"Comprei oito fronhas, mas chegaram apenas quatro.",2026-11-01,cama_mesa_banho,SELLER-DEMO-01
+DEMO-002,DEMO-ORDER-002,5,Entrega não recebida,"Meu produto era para ter chegado até 15/08, mas até hoje não recebi.",2026-11-02,beleza_saude,SELLER-DEMO-02
+DEMO-003,DEMO-ORDER-003,1,Possível falsificação,"O cartucho chegou embolorado e parece falsificado.",2026-11-03,informatica_acessorios,SELLER-DEMO-03
+DEMO-004,DEMO-ORDER-004,5,Entrega excelente,"Chegou antes do prazo e o produto corresponde ao anunciado.",2026-11-04,utilidades_domesticas,SELLER-DEMO-04
+DEMO-005,DEMO-ORDER-005,3,,"",2026-11-05,moveis_decoracao,SELLER-DEMO-05
+DEMO-006,DEMO-ORDER-006,1,Produto com defeito,"O produto chegou quebrado e não funciona.",2026-11-06,eletrodomesticos,SELLER-DEMO-06
+DEMO-007,DEMO-ORDER-007,2,Embalagem danificada,"A embalagem veio aberta e amassada.",2026-11-07,brinquedos,SELLER-DEMO-07
+DEMO-008,DEMO-ORDER-008,2,Sem resposta,"O vendedor não respondeu minhas mensagens.",2026-11-08,moveis_decoracao,SELLER-DEMO-08
+DEMO-009,DEMO-ORDER-009,1,Cobrança duplicada,"Foi cobrado duas vezes e não recebi o estorno.",2026-11-09,telefonia,SELLER-DEMO-09
+DEMO-010,DEMO-ORDER-010,5,Produto aprovado,"Produto excelente, entrega rápida. Recomendo.",2026-11-10,beleza_saude,SELLER-DEMO-10
