@@ -13,6 +13,7 @@ import gradio as gr
 import numpy as np
 import pandas as pd
 import requests
+from olist_agent.llm import analyze_with_openrouter
 
 ROOT = Path(__file__).parent
 DEFAULT_ZIP = ROOT / "data" / "olist_public_dataset.zip"
@@ -373,6 +374,19 @@ def run_review(score, title, comment):
         result
     )
 
+def run_review_with_llm(score, title, comment, api_key, model):
+    markdown, result = run_review(score, title, comment)
+    semantic = {"status": "segunda opinião não executada"}
+    if api_key:
+        try:
+            semantic = analyze_with_openrouter(
+                {"review_score": score, "review_comment_title": title, "review_comment_message": comment},
+                api_key, model or "openai/gpt-oss-120b"
+            )
+        except Exception as exc:
+            semantic = {"error": str(exc)}
+    return markdown, result, semantic
+
 def launch():
     with gr.Blocks(title="Olist Intelligent Reviews") as demo:
         gr.Markdown("# Olist Intelligent Reviews\n### Agente de Análise de Reviews — Fase 3\nProtótipo executado sobre o dataset real da Olist.")
@@ -399,10 +413,14 @@ def launch():
                 title = gr.Textbox(label="Título")
             comment = gr.Textbox(label="Comentário", lines=4)
             load_example.click(load_review, inputs=selected, outputs=[score, title, comment])
+            with gr.Accordion("Segunda opinião semântica via OpenRouter (opcional)", open=False):
+                api_key = gr.Textbox(label="OpenRouter API key", type="password", value=os.getenv("OPENROUTER_API_KEY", ""))
+                model = gr.Textbox(label="Modelo", value=os.getenv("OPENROUTER_MODEL", "openai/gpt-oss-120b"))
             run_btn = gr.Button("Executar agente", variant="primary")
             result = gr.Markdown()
             result_json = gr.JSON(label="Saída estruturada")
-            run_btn.click(run_review, inputs=[score, title, comment], outputs=[result, result_json])
+            semantic_json = gr.JSON(label="Segunda opinião generativa (se ativada)")
+            run_btn.click(run_review_with_llm, inputs=[score, title, comment, api_key, model], outputs=[result, result_json, semantic_json])
         with gr.Tab("Metodologia e auditoria"):
             gr.Markdown(
                 "### Camadas de análise\n"
