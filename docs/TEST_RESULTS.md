@@ -1,35 +1,30 @@
-# Resultados da validação funcional
+# Resultados de validação — versão com dados reais
 
 Data da execução: 19/11/2026.
 
-## Testes automatizados
+## Testes automatizados locais
 
-Execução: python -m pytest -q
+Comando: python -m pytest -q
 
-Resultado: 11 passed.
+Resultado: 11 testes aprovados.
 
-## Cenários de aceitação exibidos na aplicação
+## Execução sobre o dataset Olist fornecido
 
-| ID | Resultado | Evidência principal |
-|---|---|---|
-| T1 — Pedido incompleto | APROVADO | Tema “Pedido incompleto / item ausente”; severidade alta. |
-| T2 — Nota e texto divergentes | APROVADO | Tema “Entrega e logística”; texto negativo apesar da nota 5; divergência identificada; revisão humana recomendada. |
-| T3 — Alegação crítica | APROVADO | Tema crítico; severidade crítica; revisão humana obrigatória. |
-| T4 — Experiência positiva | APROVADO | Tema positivo; severidade baixa; sem escalonamento. |
-| T5 — Comentário ausente | APROVADO | Informação insuficiente; causa não inferida. |
+- Linhas originais de Order_Reviews: 99.224.
+- review_id únicos: 98.410.
+- Linhas excedentes removidas por ID repetido: 814.
+- Nota média: 4,09/5.
+- Notas 1–2: 14.396 (14,6%).
+- Comentários de notas 1–2 com texto: 10.861.
+- Comentários com ao menos um padrão lexical: 5.719 (52,7%).
 
-Resultado: 5/5 cenários aprovados.
+## Teste de inicialização
 
-## Teste de inicialização da interface
+A aplicação Gradio foi iniciada localmente em http://127.0.0.1:7860/ e respondeu com HTTP 200.
 
-A interface Gradio foi iniciada localmente e respondeu com HTTP 200 em http://127.0.0.1:7860/.
+## Limitações
 
-## O que não foi validado
-
-- Não foi executado um processamento do arquivo completo do Kaggle nesta sessão, pois o CSV integral e a amostra anterior de 100 registros não estavam disponíveis como arquivos recuperáveis.
-- Não foi realizada chamada ao OpenRouter, pois não foi fornecida API key.
-- Não foram medidos ganhos de produtividade, redução de tempo, CSAT ou impacto financeiro em operação real.
-
-## Interpretação
-
-Os resultados demonstram o funcionamento do fluxo e dos controles definidos para os cinco cenários. Não representam uma avaliação de acurácia generalizável, validação em produção ou comprovação de impacto financeiro.
+- A segunda opinião OpenRouter requer API key e não foi executada nesta validação.
+- Não foi medida acurácia semântica contra rótulos de referência produzidos por especialistas.
+- Não foram medidos ganhos de produtividade, CSAT, redução de custos ou impacto financeiro em produção.
+- As métricas descrevem o dataset histórico, não a situação atual da operação Olist.
