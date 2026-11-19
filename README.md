@@ -55,7 +55,7 @@ python -m pytest -q
 python run_demo.py
 ```
 
-Validação local desta entrega: 10 testes automatizados aprovados e 5/5 cenários de aceitação aprovados.
+Validação local desta entrega: 11 testes automatizados aprovados e 5/5 cenários de aceitação aprovados.
 
 ## Dados
 
