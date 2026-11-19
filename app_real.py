@@ -249,7 +249,7 @@ def classify_review(score, title, comment):
         sentiment, severity = "Não determinado", "Indeterminada"
     else:
         neg = bool(re.search(r"\b(nao recebi|nao chegou|nao foi entregue|atras|defeit|quebrad|nao funciona|faltou|faltando|recebi metade|falta de respeito|nao gostei|nao fiquei satisfeit\\w*|nao recomendo)\b", norm))
-        pos = bool(re.search(r"\b(excelente|otim|perfeit|recomendo|muito bom|muito boa|satisfeit|adorei|amei)\b", norm))
+        pos = bool(re.search(r"\b(excelente|otim|perfeit|recomendo|muito bom|muito boa|satisfeit\\w*|adorei|amei)\b", norm))
         if re.search(r"\bnao\s+(?:estou\s+|fiquei\s+)?(?:gostei|recomendo|satisfeit\w*)", norm):
             pos = False
         sentiment = "Misto / ambíguo" if neg and pos else ("Negativo" if neg or int(score) <= 2 else ("Positivo" if pos or int(score) >= 4 else "Neutro"))
