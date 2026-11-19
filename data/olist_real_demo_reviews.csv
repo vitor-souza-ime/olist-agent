@@ -1,0 +1,8 @@
+review_id,order_id,review_score,review_comment_title,review_comment_message
+REAL-DEMO-001,public-olist-review-001,2,,"Não recebi o produto paguei por boleto e não teve uma explicação o porque tiveram problema com a entrega."
+REAL-DEMO-002,public-olist-review-002,1,,"AINDA NAO RECEBI MINHA MERCADORIA"
+REAL-DEMO-003,public-olist-review-003,2,,"Achei frete muito caro, demorou muito p chegar, queria ter entregue no dia dos pais. Só chegou terça dia 15"
+REAL-DEMO-004,public-olist-review-004,1,"Produto com defeito","Recebi o produto com defeito e aguardo resolução."
+REAL-DEMO-005,public-olist-review-005,1,"baixa qualidade","Esperava que a mercadoria tivesse mais qualidade; péssima qualidade."
+REAL-DEMO-006,public-olist-review-006,1,,"Caixa chegou violada. Produto faltando peças e com marcas de uso."
+REAL-DEMO-007,public-olist-review-007,1,,"Chegou meu produto fui verificar o suporte de TV faltou a haste de ajuste."
