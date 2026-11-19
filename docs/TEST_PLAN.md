@@ -22,6 +22,7 @@ Verificar se o protótipo executa os comportamentos centrais definidos para o Ag
 - Reconhecimento de avaliação positiva.
 - Tratamento de comentário vazio.
 - Agregação de resumo em lote.
+- Distinção entre reclamação de entrega e cobrança/estorno.
 - Validação do esquema Olist.
 - Enriquecimento por pedido sem duplicar review em pedidos com múltiplos itens.
 
