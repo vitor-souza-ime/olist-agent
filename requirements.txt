@@ -1,6 +1,8 @@
 gradio>=5.0,<7
 pandas>=2.0,<4
+numpy>=1.26,<3
 requests>=2.31,<3
 pytest>=8.0,<9
 python-docx>=1.1,<2
+python-pptx>=1.0,<2
 matplotlib>=3.7,<4
